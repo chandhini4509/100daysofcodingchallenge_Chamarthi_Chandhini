@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        .thumbnail{
+            width:100px;
+            height:100px;
+            margin:10px;
+            cursor: pointer;
+        }
+        #fullImage{
+            display:none;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+<body>
+   <h2>Image Gallery</h2>
+   <div id="thumbnails">
+    <img class="thumbnail" src="https://cdn.pixabay.com/photo/2014/02/27/16/10/flowers-276014_640.jpg" alt="Thumbnail 1">
+    <img class="thumbnail" src="https://i.pinimg.com/736x/04/24/12/04241279f5a85323615d383e6a55f151.jpg" alt="Thumbnail 2">
+    <img class="thumbnail" src="https://cdn.pixabay.com/photo/2018/01/12/10/19/fantasy-3077928_1280.jpg" alt="Thumbnail 3">
+    </div> 
+    <div id="fullImageContainer">
+        <img id="fullImage" src=" " alt="full Image">
+    </div>
+    <script src="Imagegallery.js"></script>
+</body>
+</html>

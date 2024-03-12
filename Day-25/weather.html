@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #weather-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="weather-container">
+        <h2>Weather App</h2>
+        <input type="text" id="cityInput" placeholder="Enter city">
+        <button onclick="getWeather()">Get Weather</button>
+        <div id="weather-info"></div>
+    </div>
+
+    <script>
+        async function getWeather() {
+            const cityInput = document.getElementById("cityInput").value;
+            const apiKey = "YOUR_API_KEY"; // Replace with your OpenWeatherMap API key
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=metric`;
+
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error("City not found. Please enter a valid city name.");
+                }
+
+                const weatherData = await response.json();
+                displayWeather(weatherData);
+            } catch (error) {
+                displayError(error.message);
+            }
+        }
+
+        function displayWeather(weatherData) {
+            const weatherInfoDiv = document.getElementById("weather-info");
+            weatherInfoDiv.innerHTML = `
+                <h3>Weather in ${weatherData.name}, ${weatherData.sys.country}</h3>
+                <p>Temperature: ${weatherData.main.temp}°C</p>
+                <p>Description: ${weatherData.weather[0].description}</p>
+                <p>Humidity: ${weatherData.main.humidity}%</p>
+            `;
+        }
+
+        function displayError(errorMessage) {
+            const weatherInfoDiv = document.getElementById("weather-info");
+            weatherInfoDiv.innerHTML = `<p style="color: red;">${errorMessage}</p>`;
+        }
+    </script>
+</body>
+</html>
